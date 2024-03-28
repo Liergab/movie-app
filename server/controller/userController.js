@@ -12,6 +12,20 @@ export const createUser = asyncHandler(async (req, res) => {
  
 })
 
+export const loginUser = asyncHandler(async(req ,res) => {
+
+    const{email, password} = req.body
+
+     await userServices.loginUser(email, password, res)
+
+})
+
+export const logoutUser = asyncHandler(async(req, res) => {
+
+    await userServices.logoutUser(res)
+
+})
+
 
 export const getAllUser = asyncHandler(async(req, res) => {
     
@@ -19,4 +33,18 @@ export const getAllUser = asyncHandler(async(req, res) => {
 
         res.status(200).json({Data:user})
    
+})
+
+export const getCurrentUser = asyncHandler(async(req,res) => {
+    res.json(req.user)
+})
+
+export const updateCurrentUserProfile = asyncHandler(async(req,res) => {
+    
+    const{username, email, password} = req.body
+
+    const id = req.user.id
+
+    await userServices.updateCurrentUser(username,email,password,id,res)
+
 })
