@@ -31,7 +31,7 @@ export const getAllUser = asyncHandler(async(req, res) => {
     
         const user = await userServices.getAllUsers()
 
-        res.status(200).json({Data:user})
+        res.status(200).json(user)
    
 })
 

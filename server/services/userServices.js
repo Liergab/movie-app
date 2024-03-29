@@ -41,6 +41,7 @@ export const loginUser = async(email, password, res) => {
             email     : user.email,
             username  : user.username,
             createdAt : user.createdAt,
+            isAdmin   : user.isAdmin
         })
     }else{
         res.status(400)
@@ -83,6 +84,7 @@ export const updateCurrentUser = async(username, email, password, id,res) => {
         _id: updateUser.id,
         username: updateUser.username,
         email: updateUser.email,
+        isAdmin:updateUser.isAdmin,
         createdAt: updateUser.createdAt,
         updatedAt: updateUser.updatedAt
     });
