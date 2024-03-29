@@ -1,31 +1,37 @@
-import * as React from 'react';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import { IoHome } from "react-icons/io5";
-import { MdLocalMovies } from "react-icons/md";
-import { IoMdLogIn } from "react-icons/io";
-import { PiUserPlus } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
-import { CiLogout } from "react-icons/ci";
-import { RxDashboard } from "react-icons/rx";
-import { BsMenuDown } from "react-icons/bs";
-import {Link, useNavigate} from 'react-router-dom'
-import { useSelector, useDispatch } from "react-redux";
-import { BsMenuUp } from "react-icons/bs";
-import { useLogoutMutation } from '../../services/redux/api/user';
-import { logout } from '../../services/redux/features/auth/authSlice';
-import { Divider } from '@mui/material';
+import { useState }           from 'react';
+import {Link, useNavigate}    from 'react-router-dom'
+import { useLogoutMutation }  from '../../services/redux/api/user';
+import { logout }             from '../../services/redux/features/auth/authSlice';
+import {useSelector, 
+        useDispatch}          from "react-redux";
+
+//material Ui
+import { Button,
+         Divider, 
+         Drawer }              from '@mui/material';
+// Icon
+import { IoHome }              from "react-icons/io5";
+import { MdLocalMovies }       from "react-icons/md";
+import { IoMdLogIn }           from "react-icons/io";
+import { PiUserPlus }          from "react-icons/pi";
+import { CgProfile }           from "react-icons/cg";
+import { CiLogout }            from "react-icons/ci";
+import { RxDashboard }         from "react-icons/rx";
+import { BsMenuDown }          from "react-icons/bs";
+import { BsMenuUp }            from "react-icons/bs";
+
+
+
 
 export default function TemporaryDrawer() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
   const {userInfo} = useSelector((state) => state.auth)
-  // const  userInfo = false
-  const admin = false
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -67,10 +73,10 @@ export default function TemporaryDrawer() {
             <small className='text-[10px]'>LOGIN</small>
            </div>
           }
-          {userInfo && (<h1 className='mx-auto'>BRYAN GABRIEL</h1>)}
+          {userInfo && (<h1 className='mx-auto'>{userInfo?.username.toUpperCase()}</h1>)}
         </Link>
 
-        {userInfo && admin &&
+        {userInfo && userInfo?.isAdmin &&
         <Link to='/admin/movies/dashboard' className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
           <div className='flex flex-col items-end justify-center gap-2'>
             <RxDashboard  className='hover:scale-125 transition-all mx-auto'  size={30}/>
