@@ -61,7 +61,7 @@ export const logoutUser = async(res) => {
 
 export const getAllUsers = async() => {
 
-    const users = await userModel.find();
+    const users = await userModel.find().select('-password');
     return users;
    
 }
