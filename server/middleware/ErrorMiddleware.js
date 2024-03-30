@@ -25,6 +25,10 @@ export const error = (err, req, res, next) => {
             case httpErrors.SERVER_ERROR:
                 res.json({title:"server error",message: err.message, stackTrace: err.stack});
                 break;
+            case httpErrors.CONFLICT:
+                res.json({title:"Conflict",message: err.message, stackTrace: err.stack});
+                break;
+            
         
             default:
                 break;
