@@ -23,6 +23,8 @@ export const createUser  = async(username, email, password, res) => {
          password:await hashPassword(password)
     });
     
+   GenerateToken(res, user._id);
+    
     return user;
 }
 
