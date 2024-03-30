@@ -1,6 +1,6 @@
 import { useState }           from 'react';
 import {Link, useNavigate}    from 'react-router-dom'
-import { useLogoutMutation }  from '../../services/redux/api/user';
+import { useGetCurrentUserQuery, useLogoutMutation }  from '../../services/redux/api/user';
 import { logout }             from '../../services/redux/features/auth/authSlice';
 import {useSelector, 
         useDispatch}          from "react-redux";
@@ -30,6 +30,10 @@ export default function TemporaryDrawer() {
     setOpen(newOpen);
   };
 
+  // getting the data of the current user using cookieParser
+  const {data:currentUser, isLoading:isLoadingCurrentUser} = useGetCurrentUserQuery()
+
+  //getting the data of user in localstorage
   const {userInfo} = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
@@ -47,9 +51,13 @@ export default function TemporaryDrawer() {
     }
   }
 
+  if(isLoadingCurrentUser){
+    return <h1>Loading ...</h1>
+  }
 
   const DrawerList = (
     <div className='w-[150px] h-screen flex flex-col justify-between bg-slate-800 text-slate-400 border-r-2 border-r-slate-400 gap-4' onClick={toggleDrawer(false)}>
+      
       <div className='flex-[1] w-full flex flex-col items-center justify-center gap-2'>
           <Link to='/' className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4 cursor-pointer '>
             <div className='flex flex-col items-end justify-center gap-2'>
@@ -73,10 +81,10 @@ export default function TemporaryDrawer() {
             <small className='text-[10px]'>LOGIN</small>
            </div>
           }
-          {userInfo && (<h1 className='mx-auto'>{userInfo?.username.toUpperCase()}</h1>)}
+          {userInfo && currentUser &&  (<h1 className='mx-auto'>{userInfo?.username.toUpperCase()}</h1>)}
         </Link>
 
-        {userInfo && userInfo?.isAdmin &&
+        {userInfo && userInfo?.isAdmin && currentUser.isAdmin &&
         <Link to='/admin/movies/dashboard' className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
           <div className='flex flex-col items-end justify-center gap-2'>
             <RxDashboard  className='hover:scale-125 transition-all mx-auto'  size={30}/>
@@ -85,21 +93,21 @@ export default function TemporaryDrawer() {
         </Link>
         }
 
-        <Link to={userInfo ? '/profile' : 'register'} className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
+        <Link to={userInfo && currentUser ? '/profile' : 'register'} className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
           {!userInfo && 
             <div className='flex flex-col items-end justify-center gap-2'>
               <PiUserPlus className='hover:scale-125 transition-all mx-auto'  size={30}/>
               <small className='text-[10px]'>REGISTER</small>
             </div>
           }
-          {userInfo && 
+          {userInfo && currentUser &&
             <div className='flex flex-col items-end justify-center gap-2'>
               <CgProfile className='hover:scale-125 transition-all mx-auto'  size={30} />
               <small className='text-[10px]'>PROFILE</small>
             </div>
           }
         </Link>
-        {userInfo &&
+        {userInfo && currentUser &&
         <div 
            onClick={handleLogout}
           className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
@@ -109,7 +117,7 @@ export default function TemporaryDrawer() {
           </div>
         </div>
         }
-      
+       
       </div>
     </div>
   );

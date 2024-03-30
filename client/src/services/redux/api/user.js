@@ -8,7 +8,8 @@ export const  userApiSlice = apiSlice.injectEndpoints({
                 url    : `${USERS_URL}/login`,
                 method : "POST",
                 body   : data
-            })
+            }),
+            invalidatesTags: ['GetCurrentUser'],
         }),
 
         register: builder.mutation({
@@ -17,7 +18,7 @@ export const  userApiSlice = apiSlice.injectEndpoints({
                 method : "POST",
                 body   :  data
             }),
-            invalidatesTags: ['GetAllUsers'],
+            invalidatesTags: ['GetAllUsers','GetCurrentUser'],
         }),
 
         logout: builder.mutation({
@@ -33,14 +34,15 @@ export const  userApiSlice = apiSlice.injectEndpoints({
                 method :  "PUT",
                 body   :  data
             }),
-           
+            invalidatesTags: ['GetAllUsers','GetCurrentUser'],
         }),
 
         getCurrentUser: builder.query({
             query : () => ({
                 url    : `${USERS_URL}/profile`,
                 method : "GET"
-            })
+            }),
+            providesTags: ['GetCurrentUser',],
         }),
 
         getAllUser: builder.query({

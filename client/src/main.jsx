@@ -15,6 +15,7 @@ import Home                    from './pages/Home'
 import Register                from './pages/Auth/Register'
 import PrivateRoute            from './pages/Auth/PrivateRoute'
 import Profile                 from './pages/User/Profile'
+import Movie from './pages/movies/Movie'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +28,8 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>} />
       </Route>
+
+      <Route path='/dashboard/movies' element={<Movie/>} />
     </Route>
   )
 )
