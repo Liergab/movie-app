@@ -28,13 +28,20 @@ export const deleteGenre = asyncHandler(async(req, res) => {
     res.status(200).json({message:'sucessfull deleted'})
 })
 
-export const getAllGenre = asyncHandler(async(req, res) => {
+export const getAllGenrePagination = asyncHandler(async(req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
 
-   const {data, totalCount, totalPages} = await genreServices.getAllGenre(page, limit)
+   const {data, totalCount, totalPages} = await genreServices.getAllGenrePagination(page, limit)
 
     res.status(200).json({ totalCount,totalPages,data})
+})
+
+export const getAllGenre = asyncHandler(async(req, res) => {
+    
+    const data = await genreServices.getAllGenre()
+
+    res.status(200).json(data)
 })
 
 

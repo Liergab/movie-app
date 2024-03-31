@@ -44,7 +44,7 @@ export const deleteGenre = async(id, res) => {
     return genre
 }
 
-export const getAllGenre = async(page = 1, limit = 5) => {
+export const getAllGenrePagination = async(page = 1, limit = 5) => {
     const skip = (page - 1) * limit;
 
     //countDocuments get total count off collection
@@ -56,6 +56,13 @@ export const getAllGenre = async(page = 1, limit = 5) => {
     const genre = await GENRE_MODEL.find().skip(skip).limit(limit)
 
     return {data:genre, totalCount, totalPages}
+}
+
+export  const getAllGenre = async() => {
+
+    const genre = await GENRE_MODEL.find()
+
+    return genre
 }
 
 
