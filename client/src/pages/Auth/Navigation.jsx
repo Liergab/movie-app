@@ -65,7 +65,7 @@ export default function TemporaryDrawer() {
               <small className='text-[10px]'>HOME</small>
             </div>
           </Link>
-          <Link to='dashboard/movies' className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4 cursor-pointer '>
+          <Link to='/movies' className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4 cursor-pointer '>
             <div className='flex flex-col items-end justify-center gap-2'>
               <MdLocalMovies className='hover:scale-125 transition-all mx-auto' size={30} />
               <small className='text-[10px] text-center'>MOVIES</small>

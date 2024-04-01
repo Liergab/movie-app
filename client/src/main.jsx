@@ -15,21 +15,30 @@ import Home                    from './pages/Home'
 import Register                from './pages/Auth/Register'
 import PrivateRoute            from './pages/Auth/PrivateRoute'
 import Profile                 from './pages/User/Profile'
-import Movie from './pages/movies/Movie'
+import AllMovie                from './pages/movies/AllMovie'
+import AdminLayout             from './pages/Admin/AdminLayout'
+import GenreList               from './pages/Admin/GenreList'
+import AdminDashboard          from './pages/Admin/AdminDashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />} >
+
       <Route index={true} path='/' element={<Home/>}/>
-      <Route  path='/login' element={<Login/>}/>
-      <Route  path='/register' element={<Register/>}/>
+      <Route  path='/login'        element={<Login/>}/>
+      <Route  path='/register'     element={<Register/>}/>
+      <Route  path='/movies'       element={<AllMovie/>} />
       
       //user private routes
       <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>} />
       </Route>
 
-      <Route path='/dashboard/movies' element={<Movie/>} />
+       //Admin private routes
+      <Route path="" element={<AdminLayout/>}>
+        <Route path='/admin/movies/dashboard' element={<AdminDashboard/>} />
+        <Route path='admin/movies/genre' element={<GenreList/>}/>
+      </Route>
     </Route>
   )
 )
