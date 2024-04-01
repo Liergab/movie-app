@@ -6,7 +6,7 @@ import MOVIE_MODEL from "../model/MOVIE_MODEL.js"
 export const createMovie = async(body, res) =>{
     const {name, year, genre, detail, cast, image} = body
 
-    if(!name || !year || !genre || !detail || !cast || !image ) {
+    if(!name || !year ||  !detail || !cast || !image ) {
         res.status(400)
         throw new Error('All fields required!')
     }
