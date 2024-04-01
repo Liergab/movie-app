@@ -4,9 +4,9 @@ import MOVIE_MODEL from "../model/MOVIE_MODEL.js"
 // Admin side
 
 export const createMovie = async(body, res) =>{
-    const {name, year, genre, detail, cast} = body
+    const {name, year, genre, detail, cast, image} = body
 
-    if(!name || !year || !genre || !detail || !cast ) {
+    if(!name || !year || !genre || !detail || !cast || !image ) {
         res.status(400)
         throw new Error('All fields required!')
     }
@@ -21,7 +21,7 @@ export const createMovie = async(body, res) =>{
         genre,
         detail,
         cast: castString,   
-        image:'sample',
+        image,
         numReviews:5
     })
 
