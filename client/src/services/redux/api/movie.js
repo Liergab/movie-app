@@ -26,6 +26,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
               method: "PUT",
               body: updatedMovie,
             }),
+            invalidatesTags: ['GetAllMovies'],
           }),
           
           deleteComment: builder.mutation({
@@ -41,6 +42,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
               url: `${MOVIE_URL}/delete-movie/${id}`,
               method: "DELETE",
             }),
+            invalidatesTags: ['GetAllMovies'],
           }),
 
           getSpecificMovie: builder.query({
@@ -69,7 +71,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
               url: `${UPLOAD_URL}`,
               method: "POST",
               body: formData,
-            }),
+            })
           }),
     })
 })
