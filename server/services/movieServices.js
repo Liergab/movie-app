@@ -29,13 +29,12 @@ export const createMovie = async(body, res) =>{
 }
 
 export const updateMovie = async (body, id, res) => {
-    const { name, year, genre, detail, cast } = body;
+    const { name, year, genre, detail, cast,image } = body;
     const castArray = Array.isArray(cast) ? cast : [cast];
     const castString = castArray.join(', ');
 
     const updateFields = {
       cast: castString,
-      image: 'sample',
       numReviews: 5,
     };
   
@@ -44,6 +43,7 @@ export const updateMovie = async (body, id, res) => {
     if (genre) updateFields.genre = genre;
     if (detail) updateFields.detail = detail;
     if (castString) updateFields.cast = castString;
+    if(image)updateFields.image = image
   
     const movie = await MOVIE_MODEL.findByIdAndUpdate(id, { $set: updateFields }, { new: true });
     return movie;
