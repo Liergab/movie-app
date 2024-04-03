@@ -1,15 +1,15 @@
 import React from 'react'
-import { useGetNewMoviesQuery } from '../../services/redux/api/movie'
 import {Link} from 'react-router-dom'
 import {Button} from '@mui/material'
 import { IoHomeSharp } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import SliderUI from '../../components/ui/SliderUI';
+import { useGetNewMoviesQuery } from '../../services/redux/api/movie'
 
 const Header = () => {
-    const {data:NewMovies, isLoading} = useGetNewMoviesQuery()
+    const {data:NewMovies} = useGetNewMoviesQuery()
   return (
-    <div className='flex flex-col md:flex-row w-full px-4  md:px-14 gap-20 '>
+    <div className='flex flex-col md:flex-row w-full px-4  md:px-14 gap-20 mt-[6rem]'>
      <nav className='flex flex-col items-start justify-around h-full max-h-40  p-2 gap-2'>
         <Link to='/'>
             <Button variant='outlined' startIcon={<IoHomeSharp className='w-4' />} color="inherit" className='hover:border-blue-900 ' >

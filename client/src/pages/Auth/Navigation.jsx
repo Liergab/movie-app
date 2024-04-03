@@ -123,17 +123,21 @@ export default function TemporaryDrawer() {
   );
 
   return (
-    <div className=' flex flex-row-reverse'>
-      <Button 
-        variant="outlined" 
-        onClick={toggleDrawer(true)} 
-        endIcon={open ? <BsMenuDown /> : <BsMenuUp />}
-     >
-        MENU
-      </Button>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
-      </Drawer>
+    <div className='fixed z-20 w-full top-0  '>
+      <div className='flex flex-row-reverse bg-slate-800 bg-opacity-80 p-4'>
+        <Button 
+          variant="contained" 
+          color='inherit'
+          onClick={toggleDrawer(true)} 
+          endIcon={open ? <BsMenuDown /> : <BsMenuUp />}
+          className='sticky'
+      >
+          MENU
+        </Button>
+        <Drawer open={open} onClose={toggleDrawer(false)}>
+          {DrawerList}
+        </Drawer>
+      </div>
     </div>
   );
 }

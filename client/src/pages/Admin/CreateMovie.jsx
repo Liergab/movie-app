@@ -112,9 +112,10 @@ const CreateMovie = () => {
 
   return (
     <div className='bg-slate-900 w-full h-screen flex items-center justify-center'>
-        <div className='bg-gray-600 w-full max-w-2xl h-full max-h-[500px] rounded-md flex flex-col items-center justify-center'>
+        <div className='bg-slate-950 w-full max-w-2xl h-auto rounded-md flex flex-col items-center justify-center px-4 py-8 space-y-10'>
        
             <h1 className='text-2xl font-bold'>Create Movie</h1>
+
             <form   className='w-full flex flex-col items-center justify-center space-y-6'>
                 <input 
                     type='text'

@@ -9,15 +9,15 @@ const AdminMovieList = () => {
     return;
   }
   return (
-    <div className='w-full flex flex-col  px-10 md:px-32 gap-20'>
+    <div className='w-full flex flex-col  px-4 md:px-32 gap-20 mt-20'>
       <div>
           <h1 className='text-2xl font-bold'>ALL Movie ({movies.length})</h1>
       </div>
-      <div className='flex flex-wrap  items-center justify-center  gap-4'>
+      <div className='flex flex-wrap  items-center justify-center gap-4 '>
          {movies.map((movie) => (
             <div
               key={movie?._id}
-              className="flex flex-col items-center justify-center bg-slate-950 max-w-80 p-4 rounded-md gap-2"
+              className="flex flex-col items-center justify-center bg-slate-950 max-w-80 p-4 rounded-md gap-2 cursor-pointer hover:ring-2 ring-sky-800 ring-offset-4 ring-offset-slate-800 dark:ring-offset-slate-900"
             >
               <div className="w-full max-w-80 h-48 overflow-hidden"> 
                  <img
