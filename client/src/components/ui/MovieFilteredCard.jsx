@@ -20,6 +20,7 @@ const MovieFilteredCard = ({movies}) => {
                         )}
                         </p>
                     </Link>
+                    <p className='text-xs'>Cast: {movie?.cast}</p>
                     <p className='text-xs'>Year: {movie?.year}</p>
                 </div>
             </div>

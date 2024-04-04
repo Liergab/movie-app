@@ -17,7 +17,8 @@ export const movieApiSlice = apiSlice.injectEndpoints({
                 url    : `${MOVIE_URL}/${id}/reviews`,
                 method : "POST",
                 body   : {rating, id,comment}
-            })
+            }),
+            invalidatesTags: ['GetMovieById'],
         }),
 
         updateMovie: builder.mutation({
@@ -47,6 +48,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
 
           getSpecificMovie: builder.query({
             query: (id) => `${MOVIE_URL}/specific-movie/${id}`,
+            providesTags: ['GetMovieById'],
           }),
 
           getNewMovies: builder.query({

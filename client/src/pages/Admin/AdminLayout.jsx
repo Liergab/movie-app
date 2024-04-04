@@ -10,7 +10,7 @@ const AdminLayout = () => {
 
      if(isLoading) return <h1>Loading..</h1>
 
-  return   userInfo.isAdmin 
+  return userInfo &&  userInfo.isAdmin 
         && currentUser.isAdmin 
         ? <Outlet/> 
         : <Navigate to='/login' />
