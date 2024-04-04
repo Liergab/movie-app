@@ -4,7 +4,7 @@ import { AdminMiddleware, AuthMiddleware } from '../middleware/AuthMiddlware.js'
 const genreRouter = express.Router()
 
 genreRouter.post('/',  [AuthMiddleware, AdminMiddleware], controller.createGenre)
-genreRouter.get('/',   [AuthMiddleware,AdminMiddleware], controller.getAllGenre)
+genreRouter.get('/',   [AuthMiddleware], controller.getAllGenre)
 genreRouter.put('/:id',     [AuthMiddleware, AdminMiddleware], controller.updateGenre)
 genreRouter.delete('/:id',  [AuthMiddleware,AdminMiddleware], controller.deleteGenre)
 genreRouter.get('/pagination',     [AuthMiddleware,AdminMiddleware], controller.getAllGenrePagination)
