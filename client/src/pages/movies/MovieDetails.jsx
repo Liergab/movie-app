@@ -5,12 +5,17 @@ import { Button } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { formatMemberSince } from '../../hooks/FormDate'
+
+
 const MovieDetails = () => {
     const {userInfo} = useSelector((state) => state.auth)
-  
+    
     const{id} = useParams()
+
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
+
     const{data:movie, refetch} = useGetSpecificMovieQuery(id)
     const [ addReviewMovie ] = useAddReviewMovieMutation()
 
@@ -28,7 +33,8 @@ const MovieDetails = () => {
             toast.error(error.data.message)
         }
     }
-  
+    
+    
 
   return (
     <div className='mt-20 flex flex-col items-center justify-center gap-20'>
@@ -46,7 +52,7 @@ const MovieDetails = () => {
                 </div>
             </div>
         </div>
-        <section className='w-full flex items-center justify-center mb-20'>
+        <section className='w-full flex items-center justify-center mb-10'>
             {userInfo ? (
             <form action="" className='w-full max-w-4xl flex flex-col items-start justify-center gap-4'>
                 <label htmlFor="comment" className="block text-xl mb-2 ">
@@ -79,29 +85,40 @@ const MovieDetails = () => {
             </form> 
 
             ):(
-                <p>
-                Please <Link to="/login">Sign In</Link> to write a review
+                <p className='text-lg font-bold'>
+                    Please 
+                    <Link to="/login" className='hover:text-blue-900 px-2 underline'>
+                        Sign In
+                    </Link> 
+                    to write a review
               </p>
             )}
         </section>
-        <section className='mb-20 w-full flex  max-w-4xl' >
+        <section className='w-full max-w-4xl h-60 mb-24' >
 
             <h1>{movie?.reviews.length === 0 && "No Reviews"}</h1>
 
-            <div className='flex flex-wrap  w-full gap-1'>
-                {movie?.reviews.map((review) => (
-                    <div key={review?._id} className='w-full flex flex-wrap items-center justify-center bg-gray-950 p-4 rounded-md'>
-                        <div>
-                            <strong className="text-[#B0B0B0]">{review.name}</strong>
-                            <p className="text-[#B0B0B0]">
-                                {review.createdAt.substring(0, 10)}
-                            </p>
-                            <p className="my-4">{review.comment}</p>
-
-                        </div>
+            <div className='flex flex-wrap items-center justify-center gap-3 p-2 '>
+                {movie?.reviews?.map((review) => (
+                    <div key={review?._id} className='flex flex-col flex-wrap items-center justify-center bg-black w-full max-w-60 h-full max-h-40 p-2 rounded-md'>
+                      <h1>
+                        <span  className='font-semibold'>Name: </span> {" "} 
+                        {review?.name}
+                      </h1> 
+                       <p>
+                        <span  className='font-semibold'>Comment: </span> {" "}
+                        {review?.comment}
+                      </p>
+                      <p>
+                        <span  className='font-semibold'>Date: </span> {" "}
+                        {formatMemberSince(review?.createdAt)}
+                      </p>
                     </div>
                 ))}
-          </div>
+            </div>
+
+
+           
         </section>
     </div>
   )

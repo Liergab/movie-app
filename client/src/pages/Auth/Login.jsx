@@ -38,7 +38,6 @@ const Login = () => {
                 navigate(redirect)
                 toast.success("User successfully login")
             } catch (err) {
-                console.log(err)
                 toast.error(err.data.message)
             }
     }
@@ -49,7 +48,7 @@ const Login = () => {
             <div className='hidden bg-slate-700 md:flex-[1.3] md:flex items-center justify-center rounded-tl-md rounded-bl-md '>
              <h1>hello</h1>
             </div>
-            <div className='flex-[1] flex flex-col items-center justify-center bg-slate-900 h-full md:h-auto rounded-tr-md rounded-br-md gap-6 py-10 px-4 '>
+            <div className='flex-[1] flex flex-col items-center justify-center bg-slate-950 h-full md:h-auto rounded-tr-md rounded-br-md gap-6 py-10 px-4 '>
                 <div className='flex flex-col  justify-center space-y-4'>
                     <h1 className='text-2xl font-bold'>Welcome to Movie-app 🎥!</h1>
                     <h1 className='text-lg font-semibold'>Please enter your credential to login!</h1>

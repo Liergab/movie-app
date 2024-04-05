@@ -36,6 +36,7 @@ export const movieApiSlice = apiSlice.injectEndpoints({
               method: "DELETE",
               body: { movieId, reviewId },
             }),
+            invalidatesTags: ['GetAllMovies'],
           }),   
 
           deleteMovie: builder.mutation({
