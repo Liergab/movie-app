@@ -22,7 +22,7 @@ export const createMovie = async(body, res) =>{
         detail,
         cast: castString,   
         image,
-        numReviews
+        numReviews:0
     })
 
     return movie
@@ -35,7 +35,7 @@ export const updateMovie = async (body, id, res) => {
 
     const updateFields = {
       cast: castString,
-      numReviews
+      numReviews:0
     };
   
     if (name) updateFields.name = name;
