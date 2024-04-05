@@ -82,7 +82,7 @@ const UpdateMovie = () => {
             },
           });
     
-          navigate("/admin/movies-list");
+          navigate("/admin/movies/dashboard");
         } catch (error) {
           console.error("Failed to update movie:", error);
         }
@@ -91,7 +91,7 @@ const UpdateMovie = () => {
       const handleDelete = async() => {
         try {
             await deleteMovie(id)
-            navigate('/admin/movies-list')
+            navigate('/admin/movies/dashboard')
         } catch (error) {
              toast.error(error.data.message)
         }

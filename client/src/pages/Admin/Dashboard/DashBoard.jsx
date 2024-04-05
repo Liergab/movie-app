@@ -3,7 +3,9 @@ import React from 'react'
 
 const DashBoard = () => {
   return (
-    <div>DashBoard</div>
+    <div className='mt-60'>
+      DashBoard 1
+    </div>
   )
 }
 

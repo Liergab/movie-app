@@ -78,7 +78,7 @@ const GenreList = () => {
   };
 
   return (
-    <div className='h-screen w-full  flex items-center justify-center p-4'>
+    <div className='h-screen w-full  flex items-center justify-center p-4 mt-[-50px]'>
       <div className='w-full max-w-5xl  h-full max-h-96 flex flex-col items-center justify-center space-y-6'>
           <div className='w-full max-w-xl flex flex-row'>
             <h1 className='text-2xl font-bold'>GENRE</h1>

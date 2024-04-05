@@ -16,7 +16,7 @@ const CreateMovie = () => {
         image: null,
         genre: "",
       });
-    console.log(movieData)
+    // console.log(movieData)
       const [selectedImage, setSelectedImage] = useState(null);
       const[createMovie,{isLoading:isLoadingCreate}] = useCreateMovieMutation()
       const[uploadImage, {isLoading:isLoadingUpload,  error: uploadImageErrorDetails}] = useUploadImageMutation()
@@ -28,7 +28,7 @@ const CreateMovie = () => {
             ...prevData,
             genre: genres[0]?.id || "", // Set genre to the id of the first genre or an empty string
           }));
-          console.log(genres[0]?._id);
+          // console.log(genres[0]?._id);
         }
       }, [genres]);
     
@@ -79,7 +79,7 @@ const CreateMovie = () => {
             if (uploadImageResponse.data) {
               uploadedImagePath = uploadImageResponse.data.image;
             } else {
-              console.error("Failed to upload image: ", uploadImageErrorDetails);
+              // console.error("Failed to upload image: ", uploadImageErrorDetails);
               toast.error("Failed to upload image");
               return;
             }
@@ -88,8 +88,8 @@ const CreateMovie = () => {
               ...movieData,
               image: uploadedImagePath,
             }).unwrap();
-            console.log(movieData)
-            navigate("/admin/movies-list");
+            
+            navigate("/admin/movies/dashboard");
     
             setMovieData({
               name: "",
@@ -104,7 +104,7 @@ const CreateMovie = () => {
             toast.success("Movie Added To Database");
           }
         } catch (error) {
-          console.error("Failed to create movie: ", error.data.message);
+          // console.error("Failed to create movie: ", error.data.message);
           toast.error(`Failed to create movie: ${error.data.message}`);
         }
       };

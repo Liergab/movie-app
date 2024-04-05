@@ -9,3 +9,9 @@
    - RTk Query
    - Redux
 
+- Search 
+  - search
+  - filtered by genre
+  - filtered by year
+  - sort by top new or random
+
