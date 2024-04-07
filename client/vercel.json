@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/:match*",
+        "destination": "https://movie-app-v1v6.onrender.com/api/:match*"
+      }
+    ]
+  }

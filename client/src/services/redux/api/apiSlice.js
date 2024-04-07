@@ -13,7 +13,7 @@ const customFetchFn = (url, options) => {
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api',
+    baseUrl:'/api',
     fetchFn: customFetchFn,
   }),
   endpoints: () => ({}),
