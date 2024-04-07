@@ -5,10 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server:{
-    proxy:{
-      '/api':"http://localhost:5005",
-      '/uploads':"http://localhost:5005"
-    }
+    proxy: {
+      '/api': {
+        target: 'https://movie-app-v1v6.onrender.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   }
 })
 

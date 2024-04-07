@@ -3,6 +3,7 @@ import {Link}     from 'react-router-dom'
 import {Button}   from '@mui/material'
 import { useGetAllMoviesQuery } from '../../services/redux/api/movie'
 
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 const AdminMovieList = () => {
   const{data:movies, isLoading} = useGetAllMoviesQuery()
@@ -22,7 +23,7 @@ const AdminMovieList = () => {
             >
               <div className="w-full max-w-80 h-48 overflow-hidden"> 
                  <img
-                    src={`http://localhost:5005/images/${movie?.image}`}
+                    src={`${BASE_URL}/images/${movie?.image}`}
                     alt={movie?.name}
                     className="object-cover object-center w-full h-full rounded-sm" 
                  />

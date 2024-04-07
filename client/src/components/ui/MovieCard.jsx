@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
+
 const MovieCard = ({ movie }) => {
   return (
     <div key={movie?._id} className="relative ">
       <Link to={`/movies/${movie._id}`}>
         <img
-          src={`http://localhost:5005/images/${movie?.image}`}
+          src={`${BASE_URL}/images/${movie?.image}`}
           alt={movie?.name}
           className="w-full max-w-3xl h-60 rounded m-0 p-0 transition duration-300 ease-in-out transform group-hover:opacity-50"
         />
