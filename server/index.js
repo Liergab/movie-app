@@ -7,7 +7,7 @@ import db            from './config/db.js';
 import {PageNotFound, error} from './middleware/ErrorMiddleware.js';
 
 const app = express()
-const PORT = process.env.PORT || 5005
+const PORT = 5005 || process.env.PORT 
 
 app.use(express.json())
 app.use(cookieParser())
@@ -26,6 +26,6 @@ app.use(PageNotFound)
 app.use(error)
 
 app.listen(PORT,() => {
-    console.log(`http://localhost:${PORT || 5000}`)
+    console.log(`http://localhost:${PORT}`)
     db()
 })
