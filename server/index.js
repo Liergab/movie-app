@@ -1,9 +1,9 @@
 import                   'dotenv/config.js'
 import express       from 'express';
 import cookieParser  from 'cookie-parser';
-import path          from 'path'
 import rootRouter    from './routes/index.js';
 import db            from './config/db.js';
+import cors          from 'cors'
 import {PageNotFound, error} from './middleware/ErrorMiddleware.js';
 
 const app = express()
