@@ -100,10 +100,10 @@ const UpdateMovie = () => {
 
     
   return (
-    <div className=' w-full h-screen flex items-center justify-center'>
-        <div className='bg-slate-950 w-full max-w-2xl h-full max-h-[500px] rounded-md flex flex-col items-center justify-center'>
+    <div className=' w-full h-screen flex items-center justify-center p-4'>
+        <div className='bg-slate-950 w-full max-w-2xl h-full max-h-[500px] rounded-md flex flex-col items-center justify-center p-4'>
     
-            <h1 className='text-2xl font-bold'>Create Movie</h1>
+            <h1 className='text-2xl font-bold mb-4'>Update movie</h1>
             <form   className='w-full flex flex-col items-center justify-center space-y-6'>
                 <input 
                     type='text'

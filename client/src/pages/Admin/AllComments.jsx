@@ -22,7 +22,7 @@ const AllComments = () => {
   return (
     <div className='mt-20 w-full  h-screen flex justify-center'>
        <h1>{isLoading && "Loading..." }</h1>
-        <div className='w-full max-w-4xl'>
+        <div className='w-full max-w-96 p-4'>
             <h1 className='text-2xl font-bold'>All Comments</h1>
             {movies?.map((m) => (
                 <section
@@ -33,7 +33,7 @@ const AllComments = () => {
                 {m?.reviews.map((review) => (
                     <div
                     key={review._id}
-                    className="bg-[#1A1A1A] p-4 rounded-lg w-[50%] mt-[2rem]"
+                    className="bg-slate-950 p-4 rounded-lg w-full max-w-xl mt-[2rem]"
                     >
                     <div className="flex justify-between">
                         <strong className="text-[#B0B0B0]">{review.name}</strong>

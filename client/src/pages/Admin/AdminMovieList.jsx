@@ -1,7 +1,8 @@
-import React from 'react'
+import React      from 'react'
+import {Link}     from 'react-router-dom'
+import {Button}   from '@mui/material'
 import { useGetAllMoviesQuery } from '../../services/redux/api/movie'
-import {Link} from 'react-router-dom'
-import {Button} from '@mui/material'
+
 
 const AdminMovieList = () => {
   const{data:movies, isLoading} = useGetAllMoviesQuery()
@@ -29,7 +30,7 @@ const AdminMovieList = () => {
               <div className="flex flex-col items-start gap-1">
                   <h1 className='text-md font-bold'>{movie?.name}</h1>
 
-                  <Link to='/admin/movies/create'>
+                  <Link to={`/movies/${movie?._id}`}>
                       <p className='text-xs'>
                         {movie?.detail.length > 35
                           ? `${movie?.detail.slice(0, 35)}... `

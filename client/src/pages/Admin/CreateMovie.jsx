@@ -111,7 +111,7 @@ const CreateMovie = () => {
     
 
   return (
-    <div className='bg-slate-900 w-full h-screen flex items-center justify-center'>
+    <div className='bg-slate-900 w-full h-screen flex items-center justify-center mb-28  p-4'>
         <div className='bg-slate-950 w-full max-w-2xl h-auto rounded-md flex flex-col items-center justify-center px-4 py-8 space-y-10'>
        
             <h1 className='text-2xl font-bold'>Create Movie</h1>
