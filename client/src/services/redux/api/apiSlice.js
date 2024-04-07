@@ -13,7 +13,7 @@ const customFetchFn = (url, options) => {
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl:'/api',
+    baseUrl:  import.meta.env.VITE_REACT_APP_API_URL,
     fetchFn: customFetchFn,
   }),
   endpoints: () => ({}),
