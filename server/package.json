@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "backend": "nodemon ./index.js",
+    "dev": "nodemon ./index.js",
     "client": "npm run dev --prefix ../client",
-    "fullstack": "concurrently \"npm run backend\" \"npm run client\" "
+    "fullstack": "concurrently \"npm run dev\" \"npm run client\" "
   },
   "keywords": [],
   "author": "",
