@@ -52,7 +52,7 @@ export default function TemporaryDrawer() {
   }
 
   if(isLoadingCurrentUser){
-    return <h1>Loading ...</h1>
+    return <LinearProgress />
   }
 
   const DrawerList = (
