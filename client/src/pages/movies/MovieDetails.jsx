@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { formatMemberSince } from '../../hooks/FormDate'
 
+const BASE_URL = import.meta.env.VITE_REACT_APP_API_URL;
+
+
 
 const MovieDetails = () => {
     const {userInfo} = useSelector((state) => state.auth)
@@ -40,7 +43,7 @@ const MovieDetails = () => {
     <div className='mt-20 flex flex-col items-center justify-center gap-20'>
         <div className='w-full max-w-4xl flex flex-col items-center justify-center space-y-8  bg-slate-950 p-8 rounded-lg'>
             <div className='flex items-center justify-center'>
-                <img src={`http://localhost:5005/images/${movie?.image}`} alt={movie?.name} className='w-full max-w-4xl rounded-sm' />
+                <img src={`${BASE_URL}/images/${movie?.image}`} alt={movie?.name} className='w-full max-w-4xl rounded-sm' />
             </div>
             <div className='w-full max-w-4xl flex flex-col items-start justify-center space-y-10'>
                 <div className='flex flex-col space-y-5'>
