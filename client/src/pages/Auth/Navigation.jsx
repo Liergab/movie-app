@@ -8,7 +8,8 @@ import {useSelector,
 //material Ui
 import { Button,
          Divider, 
-         Drawer }              from '@mui/material';
+         Drawer,
+         LinearProgress }      from '@mui/material';
 // Icon
 import { IoHome }              from "react-icons/io5";
 import { MdLocalMovies }       from "react-icons/md";
