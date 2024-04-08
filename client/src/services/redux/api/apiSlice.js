@@ -1,4 +1,5 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/query/react";
+import { BASE_URL } from "../constant";
 
 const customFetchFn = (url, options) => {
   return fetch(url, {
@@ -9,7 +10,7 @@ const customFetchFn = (url, options) => {
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl:'/api',
+    baseUrl:BASE_URL,
     fetchFn: customFetchFn,
   }),
   endpoints: () => ({}),
