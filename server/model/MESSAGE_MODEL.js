@@ -1,16 +1,12 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const messageSchema = new Schema({
-    sender: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    receiver: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    conversationId: {
+        type: String,
+      },
+      sender: {
+        type: String,
+      },
     content: {
         type: String,
         required: true
@@ -21,6 +17,5 @@ const messageSchema = new Schema({
         default: 'unread' // By default, messages are unread
     }
 },{timestamps:true});
-
 export default model('messages', messageSchema)
 
