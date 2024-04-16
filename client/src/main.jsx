@@ -20,6 +20,7 @@ import AdminLayout             from './pages/Admin/AdminLayout'
 import AdminDashboard          from './pages/Admin/AdminDashboard'
 import UpdateMovie             from './pages/Admin/UpdateMovie'
 import MovieDetails            from './pages/movies/MovieDetails'
+import Message                 from './pages/Auth/Message'
 
 
 const router = createBrowserRouter(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
       //user private routes
       <Route element={<PrivateRoute/>}>
           <Route path='/profile' element={<Profile/>} />
+          <Route path='/messages' element={<Message/>}/>
       </Route>
 
        //Admin private routes

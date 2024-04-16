@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://movie-app-v1v6.onrender.com',
+        // target: 'https://movie-app-v1v6.onrender.com',
+        target: 'http://localhost:5005/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
@@ -15,3 +16,4 @@ export default defineConfig({
   },
 })
 
+// set to render when deployment

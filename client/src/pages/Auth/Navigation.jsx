@@ -8,8 +8,7 @@ import {useSelector,
 //material Ui
 import { Button,
          Divider, 
-         Drawer,
-         LinearProgress }      from '@mui/material';
+         Drawer }              from '@mui/material';
 // Icon
 import { IoHome }              from "react-icons/io5";
 import { MdLocalMovies }       from "react-icons/md";
@@ -53,7 +52,7 @@ export default function TemporaryDrawer() {
   }
 
   if(isLoadingCurrentUser){
-    return <LinearProgress />
+    return <h1>Loading ...</h1>
   }
 
   const DrawerList = (
