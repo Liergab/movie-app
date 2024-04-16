@@ -9,64 +9,6 @@ import '../../components/style/message.css'
 import { useGetConverstaionByIdQuery, useGetUserMessageByIdQuery } from '../../services/redux/api/message'
 import { useSelector } from 'react-redux'
 import ChatHeader from '../../components/ChatHeader'
-const message = [
-  {
-    convo:'hello',
-    you:true,
-    name:'Bryan'
-
-  },
-  {
-    convo:'hi ',
-    you:false,
-    name:'Chritine'
-
-  },
-  {
-    convo:'hello',
-    you:true,
-    name:'Bryan'
-
-  },
-  {
-    convo:'hello',
-    you:true,
-    name:'Bryan'
-
-  },
-  {
-    convo:'hello',
-    you:true,
-    name:'Bryan'
-
-  },
-  {
-    convo:'hi ',
-    you:false,
-    name:'Chritine'
-
-  },
-  {
-    convo:'hi ',
-    you:false,
-    name:'Chritine'
-
-  },
-  {
-    convo:'hi ',
-    you:false,
-    name:'Chritine'
-
-  },
-  {
-    convo:'hi ',
-    you:false,
-    name:'Chritine'
-
-  },
-  
-]
-
 
 const Message = () => {
   const [isRead, setIsRead] = useState(false);
