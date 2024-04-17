@@ -1,24 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import profilepic from '../../assets/profilepic.png'
-import {Avatar} from '@mui/material'
-import ToggleMessageSidebar from '../../components/ToggleMessageSidebar'
-import ReadMessage from '../../components/ReadMessage'
-import UnreadMessage from '../../components/UnreadMessage'
-import MessageInput from '../../components/MessageInput'
 import '../../components/style/message.css'
-import { useGetConverstaionByIdQuery, useGetUserMessageByIdQuery } from '../../services/redux/api/message'
-import { useSelector } from 'react-redux'
-import ChatHeader from '../../components/ChatHeader'
+import React, { 
+       useEffect, 
+       useRef, useState }             from 'react'
+import {Avatar}                       from '@mui/material'
+import ToggleMessageSidebar           from '../../components/ToggleMessageSidebar'
+import ReadMessage                    from '../../components/ReadMessage'
+import UnreadMessage                  from '../../components/UnreadMessage'
+import MessageInput                   from '../../components/MessageInput'
+import { useSelector }                from 'react-redux'
+import ChatHeader                     from '../../components/ChatHeader'
+import { timeAgo }                    from '../../hooks/FormDate'
+import AddChatBuddy                   from '../../components/AddChatBuddy'
+import io                             from 'socket.io-client'
+
+import { useCreateMessageMutation,
+         useGetConverstaionByIdQuery,
+         useGetUserMessageByIdQuery } from '../../services/redux/api/message'
+
+
+
+// const socket = io.connect('http://localhost:5005') 
 
 const Message = () => {
+  const socket = useRef()
+  const scrollRef =useRef()
   const [isRead, setIsRead] = useState(false);
   const [isUnread, setIsUnread] = useState(true);
-  const [activeToggle, setIsActiveToggle] = useState('unread');
+  const [newMessage, setNewMessage] = useState('')
   const [currentChat, setCurrentChant] = useState(null)
-
-  // useEffect(() => {
-  //   console.log(currentChat)
-  // },[currentChat])
+  const [activeToggle, setIsActiveToggle] = useState('unread');
+  
   const handleToggle = (toggle) => {
     setIsRead(false);
     setIsUnread(false);
@@ -31,19 +42,50 @@ const Message = () => {
   };
   
   const { userInfo } = useSelector((state) => state.auth);
- 
   const { data:userMessage, isLoading } = useGetUserMessageByIdQuery(userInfo?.id);
-  const {data:currentConvo, isLoading:convoLoading} = useGetConverstaionByIdQuery(currentChat?._id)
+  const {data:currentConvo, isLoading:convoLoading, refetch} = useGetConverstaionByIdQuery(currentChat?._id)
+  const [createMessage] = useCreateMessageMutation()
 
+  
+  useEffect(() => {
+    socket.current = io('http://localhost:5005')
+  },[])
 
+  useEffect(() => {
+    socket.current.emit("addUser", userInfo.id)
+    socket.current.on("getUsers", users => {
+      // console.log(users)
+    })
+  },[userInfo])
+  
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    const message = {
+      sender:userInfo?.id,
+      content:newMessage,
+      conversationId:currentChat?._id
+    }
 
-  if(isLoading || isLoading){
+    try {
+      await createMessage(message).unwrap()
+      setNewMessage('')
+      refetch()
+      
+    } catch (error) {
+      console.log(error.data.message)
+    }
+   
+  }
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({behavior:'smooth'})
+  },[currentConvo])
+
+  
+
+  if(isLoading || isLoading ){
     return;
   } 
-
-
-
-
 
   return (
     <section className='mt-[70px] size-full  flex'>
@@ -62,9 +104,9 @@ const Message = () => {
 
           {isUnread && <UnreadMessage/>}
       </div>
-      <div className='bg-slate-800 flex-[4] h-[calc(100vh-70px)] relative flex flex-col overflow-auto'>
+      <div className='bg-slate-800 flex-[4] h-[calc(100vh-70px)] relative flex flex-col '>
           <ChatHeader currentConvo={currentConvo} currentUser={userInfo}/>
-          <div className='w-full flex-1 flex flex-col items-end'>
+          <div className='w-full flex-1 flex flex-col items-end overflow-auto h-full'>
            {currentChat ? (
               <React.Fragment>
                 {currentConvo.map((m, index) => {
@@ -73,6 +115,7 @@ const Message = () => {
                     
                   <React.Fragment key={index}>
                     <div 
+                       ref={scrollRef}
                         className='w-full max-w-80'
                         style={{
                         
@@ -90,10 +133,10 @@ const Message = () => {
                           padding:'20px',
                           borderRadius: m.sender  === userInfo?.id ? '20px 20px 0px 20px'  :'40px 20px 20px 0'
                         }}>
-                        {!m.sender &&<Avatar alt={m?.name} src={'profilepic'}/>}
+                        {!m.sender && <Avatar alt={users?.username} src={'profilepic'}/>}
                           <div className='ml-[20px]'>
                             <h1>{m.content}</h1>
-                            <small>Now</small>
+                            <small>{timeAgo(new Date(m?.createdAt))}</small>
                           </div>
                       </div>
                     </div>
@@ -108,13 +151,11 @@ const Message = () => {
             )}
           </div>
        
-        <MessageInput/>
+        <MessageInput handleClick={handleSubmit} onChange={(e) => setNewMessage(e.target.value)} value={newMessage} />
 
       </div>
       <div className='bg-slate-950 flex-[1.4] w-full h-[calc(100vh-70px)] '>
-      <ToggleMessageSidebar handleToggle={handleToggle} activeToggle={activeToggle}/>
-          {isRead && <ReadMessage/>}
-          {isUnread && <UnreadMessage/>}
+            <AddChatBuddy />
       </div>
     </section>
   )
