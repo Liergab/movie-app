@@ -18,17 +18,25 @@ export const messageApiSlice = apiSlice.injectEndpoints({
             }),
             providesTags: ['GetIndividualConvo'],
         }),
+        getConverstaionByTwo:builder.query({
+            query:([currentId,user]) => ({
+                url    : `${MESSAGE_URL}/conversation/find/${currentId}/${user}`,
+                method : "GET"
+            }),
+            providesTags: ['GetConvoOfTwoUser'],
+        }),
         createMessage:builder.mutation({
             query:(message) => ({
                 url    : `${MESSAGE_URL}/create-message`,
                 method : "POST",
                 body   : message
             }),
-            invalidatesTags: ['GetIndividualConvo','GetUserMessage' ],
+            invalidatesTags: ['GetIndividualConvo','GetUserMessage,GetConvoOfTwoUser' ],
         })
     })
 })
 
 export const{ useGetUserMessageByIdQuery,
               useGetConverstaionByIdQuery,
-              useCreateMessageMutation } = messageApiSlice
+              useCreateMessageMutation,
+              useGetConverstaionByTwoQuery } = messageApiSlice

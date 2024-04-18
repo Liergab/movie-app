@@ -19,7 +19,7 @@ import { CiLogout }            from "react-icons/ci";
 import { RxDashboard }         from "react-icons/rx";
 import { BsMenuDown }          from "react-icons/bs";
 import { BsMenuUp }            from "react-icons/bs";
-
+import { FaFacebookMessenger } from "react-icons/fa6";
 
 
 
@@ -107,6 +107,15 @@ export default function TemporaryDrawer() {
             </div>
           }
         </Link>
+        {userInfo && currentUser &&
+        <Link to={'/messages'} 
+          className='transition delay-150 duration-300 ease-in-out hover:bg-slate-700 flex items-center justify-center w-full p-4'>
+          <div className='flex flex-col items-end justify-center gap-2'>
+            <FaFacebookMessenger className='hover:scale-125 transition-all mx-auto'  size={30}/>
+            <small className='text-[10px]'>Message</small>
+          </div>
+        </Link>
+        }
         {userInfo && currentUser &&
         <div 
            onClick={handleLogout}

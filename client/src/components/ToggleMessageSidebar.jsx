@@ -14,7 +14,7 @@ const ToggleMessageSidebar = ({handleToggle, activeToggle}) => {
         }
     ]
   return (
-    <section className='flex gap-10 bg-black w-full p-4'>
+    <section className='flex gap-10 bg-slate-900 w-full p-5 border-b-2 border-b-slate-950'>
         {toggleLinks.map((tb, index) => (
             <React.Fragment key={index}>
                 <Button onClick={() => handleToggle(tb.toggle)}

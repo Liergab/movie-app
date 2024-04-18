@@ -9,6 +9,7 @@ const ReadMessage = ({conversation, currentUser}) => {
 
     useEffect(() => {
       const findChatbuddy = () => {
+        
         const chatbuddyId = conversation?.members?.find((m) => m !== currentUser.id);
         setChatbuddy(chatbuddyId);
         
@@ -23,10 +24,10 @@ const ReadMessage = ({conversation, currentUser}) => {
     
     
   return (
-    <section className='w-full'>
+    <section className='w-full border-b border-b-slate-950'>
         <div className='flex border-blue-50  gap-4 py-4 px-24 text-white w-full hover:bg-slate-600 cursor-pointer'>
-            <div className='flex items-center gap-2 w-full'>
-                 <Avatar alt={users?.username} src={profilepic}/>
+            <div className='flex items-center gap-2 w-full '>
+                 <Avatar alt={users?.username} src={profilepic} />
                 {users?.username}
             </div>
         </div>
