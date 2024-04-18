@@ -35,3 +35,9 @@ export const getConversationById = asyncHandler(async(req, res) => {
 
     await messageController.getConversationById(id, res)
 })
+
+export const findTwoConvo = asyncHandler(async(req, res) => {
+    const {firstUserId, secondUserId} = req.params
+    await messageController.findTwoConvo(firstUserId,secondUserId, res)
+
+})

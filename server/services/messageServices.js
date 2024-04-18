@@ -38,3 +38,14 @@ export const getConversationById = async(id, res) => {
     res.status(200).json(messages)
 }
 
+export const findTwoConvo = async(firstUserId, secondUserId, res) => {
+
+    const conversation = await Conversation.findOne({
+        members: { $all: [firstUserId,secondUserId] },
+      });
+    if(!conversation){
+        res.status(404)
+        throw new Error('Convo Can found')
+    }
+    res.status(200).json(conversation)
+}
