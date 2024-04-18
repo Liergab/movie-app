@@ -48,3 +48,10 @@ export const updateCurrentUserProfile = asyncHandler(async(req,res) => {
     await userServices.updateCurrentUser(username,email,password,id,res)
 
 })
+
+
+export const getUserById = asyncHandler(async(req,res) => {
+    const{id} = req.params
+
+    await userServices.getUserById(id, res)
+})

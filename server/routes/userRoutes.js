@@ -10,7 +10,7 @@ userRouter.post('/login',  controller.loginUser)
 userRouter.get('/', controller.getAllUser)
 userRouter.get('/profile', [AuthMiddleware], controller.getCurrentUser)
 userRouter.put('/', [AuthMiddleware], controller.updateCurrentUserProfile)
-
+userRouter.get('/:id', controller.getUserById)
 
 
 

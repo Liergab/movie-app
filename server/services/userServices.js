@@ -91,3 +91,16 @@ export const updateCurrentUser = async(username, email, password, id,res) => {
         updatedAt: updateUser.updatedAt
     });
 }
+
+export const getUserById = async(id, res) => {
+
+    const user = await userModel.findById(id)
+
+    if(user){
+        res.status(200).json(user)
+    }else{
+        res.status(404)
+        throw new Error('user not found')
+    }
+
+}
