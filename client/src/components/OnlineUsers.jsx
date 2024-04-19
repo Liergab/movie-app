@@ -3,7 +3,9 @@ import { Avatar, Badge } from '@mui/material'
 import { useGetConverstaionByTwoQuery } from '../services/redux/api/message'
 
 const OnlineUsers = ({ onlineUsers, currentId, setCurrentChat }) => {
+
     const [user, setUser] = useState(null)
+
     const { data, isLoading, isError } = useGetConverstaionByTwoQuery([currentId, user], {
       skip: user === null,
     })
@@ -25,6 +27,13 @@ const OnlineUsers = ({ onlineUsers, currentId, setCurrentChat }) => {
   return (
     <section className="flex-1 h-full w-full p-4">
         <h1 className='font-bold text-white'>Online User</h1>
+
+        {onlineUsers.length === 0 && (
+          <div className='w-full h-full flex items-center justify-center'>
+              <h1 className='mx-auto text-2xl font-bold mt-[-80px]'>No online user</h1>
+          </div>
+         )}
+
         {onlineUsers.map((o) => (
             <div key={o?._id} className='flex flex-col mt-2 '>
                 <div className='flex items-center gap-1 ' onClick={() => handleClick(o?._id)}>

@@ -17,7 +17,11 @@ const ReadMessage = ({conversation, currentUser}) => {
       findChatbuddy();
     }, [conversation, currentUser]);
   
-    const { data:users ,  isLoading } = useGetUserByIdQuery(chatbuddy);
+    const { data:users ,  isLoading, refetch } = useGetUserByIdQuery(chatbuddy);
+
+    useEffect(() => {
+      refetch()
+    },[users])
   
     if (isLoading || !chatbuddy) return <div>Loading...</div>;
 

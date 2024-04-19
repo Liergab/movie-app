@@ -39,7 +39,6 @@ const Message = () => {
   const [activeToggle, setIsActiveToggle] = useState('read');
   const [userAddToChat, setUserAddToChat] = useState([])
 
-  
   // Toggle For Read and unread
   const handleToggle = (toggle) => {
     setIsRead(false);
@@ -60,6 +59,7 @@ const Message = () => {
   const { data:users} = useGetUserByIdQuery(chatBuddy)
   const [ createMessage] = useCreateMessageMutation()
 
+  //Get all user that has no convo with current user
   useEffect(() => {
     if (userMessage && userMessage.length > 0 && allusers && allusers.length > 0) {
       const userMap = userMessage.map((user) => user);
@@ -68,10 +68,13 @@ const Message = () => {
   
   
       const idsToRemove = otherMemberIds
-      const filteredAllusers = allusers.filter((user) => !idsToRemove.includes(user._id));
+      const filteredAllusers = allusers.filter(
+        (user) => !idsToRemove.includes(user._id) && user._id !== userInfo.id
+      );
       setUserAddToChat(filteredAllusers);
     }
   }, [userMessage, allusers]);
+
 
   // console.log(currentChat)
   useEffect(() => {
@@ -96,15 +99,24 @@ const Message = () => {
     })
   },[])
 
+
+  // Get all user connected in socket.io
   useEffect(() => {
-    if(AllUserloading) return ;
-    socket.current.emit("addUser", userInfo.id)
-    socket.current.on("getUsers", users => {
-     
-      setOnlineUsers(allusers.filter(f => users.some(u => u.userId === f._id)))
+    if (AllUserloading) return;
+    socket.current.emit("addUser", userInfo.id);
+    socket.current.on("getUsers", (users) => {
       
-    })
-  }, [userInfo, socket,allusers])
+      const allUserOnline = allusers.filter(function (f) {
+            return (
+              users.some(function (u) {
+                return u.userId === f._id;
+              }) && f._id !== userInfo.id
+            );
+          })
+      setOnlineUsers(allUserOnline)
+      
+    });
+  }, [userInfo, socket, allusers]);
 
   //The data from io socket io will be push in message
   useEffect(() => {
@@ -133,7 +145,6 @@ const Message = () => {
       await createMessage(message).unwrap()
       setNewMessage('')
       refetch()
-      
     } catch (error) {
       console.log(error.data.message)
     }
@@ -227,7 +238,11 @@ const Message = () => {
 
       </div>
       <div className='bg-slate-900 flex-[1.4] w-full h-[calc(100vh-70px)] flex flex-col p-4 '>
-            <AddChatBuddy allusers={userAddToChat} />
+        <div className='w-full flex flex-col space-y-5 p-4 border-b-2 border-b-slate-950'>
+          <h1 className='font-bold'>Add to Chat List</h1>
+          <input type="text"  placeholder='search movie mate ' className='py-2 px-4 border border-white rounded-md'/>
+        </div>
+            <AddChatBuddy allusers={userAddToChat} currentId={userInfo?.id} setCurrentChat={setCurrentChant} />
             <OnlineUsers onlineUsers={onlineUsers} currentId={userInfo?.id} setCurrentChat={setCurrentChant}/>
       </div>
     </section>
